@@ -14,7 +14,11 @@ class CreateComplaintTable extends Migration
     public function up()
     {
         Schema::create('complaint', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('complaint_type',50);
+            $table->integer('resource_id')->index('complaint_resource_id');
+            $table->integer('user_id')->index('complaint_user_id')->nullable();
+            $table->text('message');
             $table->timestamps();
         });
     }

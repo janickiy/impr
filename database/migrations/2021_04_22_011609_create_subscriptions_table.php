@@ -14,8 +14,9 @@ class CreateSubscriptionsTable extends Migration
     public function up()
     {
         Schema::create('subscriptions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('user_id')->index('subscriptions_user_id');
+            $table->integer('subscription_id')->index('subscriptions_subscription_id');
+            $table->primary(['user_id', 'subscription_id']);
         });
     }
 

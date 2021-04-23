@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
-})->middleware(['auth']);
+})->middleware(['admin']);
+
+
+
+//отображение формы аутентификации
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+
+//POST запрос аутентификации на сайте
+Route::post('login', 'Auth\LoginController@login')->name('singin');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');

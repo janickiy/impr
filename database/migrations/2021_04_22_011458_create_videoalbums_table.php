@@ -14,7 +14,10 @@ class CreateVideoalbumsTable extends Migration
     public function up()
     {
         Schema::create('videoalbums', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('name');
+            $table->text('description');
+            $table->integer('user_id')->index('videoalbums_user_id');
             $table->timestamps();
         });
     }

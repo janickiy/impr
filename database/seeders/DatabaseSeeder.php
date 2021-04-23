@@ -3,24 +3,21 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
+use App\Models\Admin;
 
 
 class DatabaseSeeder extends Seeder
 {
+
     /**
-     * Seed the application's database.
-     *
-     * @return void
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function run()
     {
-        User::create([
-            'firstname' => 'Иван',
-			'lastname' => 'Иванов',
-            'role' => 0 ,
-            'email' => 'janickiy@mail.ru',
-            'password' => app('hash')->make('1234567'),
+        Admin::create([
+            'name' => 'Admin',
+            'login' => 'admin',
+            'password' => app('hash')->make('123456'),
         ]);
     }
 }

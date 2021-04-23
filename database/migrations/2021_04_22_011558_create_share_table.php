@@ -14,7 +14,10 @@ class CreateShareTable extends Migration
     public function up()
     {
         Schema::create('share', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('content_type',50);
+            $table->integer('content_id')->index('share_content_id');
+            $table->integer('user_id')->index('share_user_id');
             $table->timestamps();
         });
     }
