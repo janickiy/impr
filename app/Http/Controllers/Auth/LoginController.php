@@ -36,7 +36,7 @@ class LoginController extends Controller
         ]);
 
         // Attempt to log the user in
-        if (\Auth::guard('web')->attempt(['login' => $request->login, 'password' => $request->password], $request->remember)) {
+        if (\Auth::guard('admin')->attempt(['login' => $request->login, 'password' => $request->password], $request->remember)) {
             // if successful, then redirect to their intended location
             return redirect()->intended(route('cp.dashbaord.index'));
         } else {
@@ -63,7 +63,7 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        \Auth::guard('web')->logout();
+        \Auth::guard('admin')->logout();
         return redirect('/');
     }
 }

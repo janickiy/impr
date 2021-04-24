@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\{Admin, User};
+use App\Models\{Admin, Users};
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use DataTables;
@@ -16,7 +16,7 @@ class DataTableController extends Controller
      */
     public function getUsers()
     {
-        $row = User::query();
+        $row = Users::query();
 
         return Datatables::of($row)
             ->addColumn('action', function ($row) {

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Users;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -18,6 +18,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        User::where('id', $id)->delete();
+        Users::where('id', $id)->delete();
     }
 }
