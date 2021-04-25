@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['middleware' => ['admin']], function () {
+
     Route::get('/', 'DashboardController@index')->name('cp.dashbaord.index');
 
     Route::group(['prefix' => 'users'], function () {
@@ -36,4 +36,3 @@ Route::group(['middleware' => ['admin']], function () {
         Route::any('admin', 'DataTableController@getAdmin')->name('cp.datatable.admin');
     });
 
-});

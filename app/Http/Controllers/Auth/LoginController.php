@@ -7,13 +7,18 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest:admin', ['except' => ['logout']]);
+    }
+
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function showLoginForm()
     {
-        $user = \Auth::user('web');
+        $user = \Auth::user('admin');
 
         if ($user) {
             return redirect()->intended(route('cp.dashbaord.index'));

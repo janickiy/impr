@@ -163,7 +163,7 @@ Use search to find needed section.
 
             <a  id="show-shortcut" data-action="toggleShortcut">
                 <span>
-                     {{ Auth::user()->login }}
+
                 </span>
             </a>
         </span>
