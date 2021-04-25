@@ -16,6 +16,14 @@ class Users extends Authenticatable
 
     protected $table = 'users';
 
+    const TYPE_USER = 0;
+    const TYPE_PRO = 1;
+
+    public static $type_name = [
+        self::TYPE_USER => 'пользователь',
+        self::TYPE_PRO => 'профи',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -123,6 +131,4 @@ class Users extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-
 }

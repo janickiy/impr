@@ -5285,16 +5285,16 @@
         },
         {
             "name": "yajra/laravel-datatables-html",
-            "version": "v4.36.2",
+            "version": "v4.36.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables-html.git",
-                "reference": "1d4d465882749f924528cac49f09ac3fd1fb77cc"
+                "reference": "9a964881da68f36d169eea0eb7a3dc5683c57b26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables-html/zipball/1d4d465882749f924528cac49f09ac3fd1fb77cc",
-                "reference": "1d4d465882749f924528cac49f09ac3fd1fb77cc",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables-html/zipball/9a964881da68f36d169eea0eb7a3dc5683c57b26",
+                "reference": "9a964881da68f36d169eea0eb7a3dc5683c57b26",
                 "shasum": ""
             },
             "require": {
@@ -5341,7 +5341,7 @@
                 "jquery",
                 "laravel"
             ],
-            "time": "2021-03-19T07:46:16+00:00"
+            "time": "2021-04-23T11:14:28+00:00"
         },
         {
             "name": "yajra/laravel-datatables-oracle",
@@ -5644,16 +5644,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.12.0",
+            "version": "2.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "d501fd2658d55491a2295ff600ae5978eaad7403"
+                "reference": "c13c0be93cff50f88bbd70827d993026821914dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/d501fd2658d55491a2295ff600ae5978eaad7403",
-                "reference": "d501fd2658d55491a2295ff600ae5978eaad7403",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/c13c0be93cff50f88bbd70827d993026821914dd",
+                "reference": "c13c0be93cff50f88bbd70827d993026821914dd",
                 "shasum": ""
             },
             "require": {
@@ -5701,7 +5701,7 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2021-03-30T12:00:00+00:00"
+            "time": "2021-04-25T12:00:00+00:00"
         },
         {
             "name": "fzaninotto/faker",

@@ -6,90 +6,202 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{Users};
 use Illuminate\Support\Facades\Validator;
+use App\Helpers\ResponseHelpers;
 use Hash;
 use URL;
 use Auth;
 
-use App\Helpers\ResponseHelpers;
-
-
 class AuthController extends Controller
 {
+    /**
+     * Проверка авторизован ли пользователь
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function check()
     {
-        $user = Auth::user('web');
+        try {
+            $user = Auth::user('web');
 
-        if ($user) {
-            return ResponseHelpers::jsonResponse(['key' => encrypt($user->id)], 200, true);
+            if ($user) {
+                return ResponseHelpers::jsonResponse(['key' => encrypt($user->id)], 200, true);
+            }
+
+            return ResponseHelpers::jsonResponse([], 200, true);
+        } catch (\Exception $e) {
+            return ResponseHelpers::jsonResponse([
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        return ResponseHelpers::jsonResponse([], 200, true);
     }
 
     /**
+     * Токен авторизация
      * @param $key
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function auth($key)
     {
-        $id = decrypt($key);
-        $user = Users::find($id);
+        try {
+            $id = decrypt($key);
+            $user = Users::find($id);
 
-        if (!$user) {
-            return ResponseHelpers::jsonResponse([], 404);
+            if (!$user) {
+                return ResponseHelpers::jsonResponse([], 404);
+            }
+
+            $oldSessionId = session()->getId();
+
+            auth('web')->login($user);
+
+            if (session()->getId() !== $oldSessionId) {
+                session()->put('prevSession', $oldSessionId);
+            }
+            return ResponseHelpers::jsonResponse(['email' => $user->email], 200);
+        } catch (\Exception $e) {
+            return ResponseHelpers::jsonResponse([
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $oldSessionId = session()->getId();
-
-        auth('web')->login($user);
-
-        if (session()->getId() !== $oldSessionId) {
-            session()->put('prevSession', $oldSessionId);
-        }
-        return ResponseHelpers::jsonResponse(['email' => $user->email], 200);
     }
 
     /**
+     * Авторизаця
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(),
-            [
-                'email' => 'required|string',
-                'password' => 'required|string'
-            ]
-        );
+        try {
+            $validator = Validator::make($request->all(),
+                [
+                    'email' => 'required|string',
+                    'password' => 'required|string'
+                ]
+            );
 
-        if ($validator->fails()) {
-            return ResponseHelpers::jsonResponse([
-                'error' => $validator->messages()
-            ], 400);
-        }
-
-        if ($user = app('auth')->getProvider()->retrieveByCredentials($request->only('email', 'password'))) {
-            $oldSessionId = session()->getId();
-
-            $auth = Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember);
-
-            if(!$auth){
+            if ($validator->fails()) {
                 return ResponseHelpers::jsonResponse([
-                    'error' => trans('auth.failed')
-                ], 401);
+                    'error' => $validator->messages()
+                ], 400);
             }
 
-            if (session()->getId() !== $oldSessionId) {
-                session()->put('prevSession', $oldSessionId);
+            if ($user = app('auth')->getProvider()->retrieveByCredentials($request->only('email', 'password'))) {
+                $oldSessionId = session()->getId();
+
+                $auth = Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember);
+
+                if (!$auth) {
+                    return ResponseHelpers::jsonResponse([
+                        'error' => trans('auth.failed')
+                    ], 401);
+                }
+
+                if (session()->getId() !== $oldSessionId) {
+                    session()->put('prevSession', $oldSessionId);
+                }
+
+                return ResponseHelpers::jsonResponse(['id' => $user->id, 'key' => encrypt($user->userId)], 200, true);
             }
 
-            return ResponseHelpers::jsonResponse(['id' => $user->id, 'key' => encrypt($user->userId)], 200, true);
+            return ResponseHelpers::jsonResponse([
+                'error' => trans('auth.failed')
+            ], 401);
+        } catch (\Exception $e) {
+            return ResponseHelpers::jsonResponse([
+                'error' => $e->getMessage()
+            ], 500);
         }
+    }
 
-        return ResponseHelpers::jsonResponse([
-            'error' => trans('auth.failed')
-        ], 401);
+    /**
+     * Authorized User Data
+     * [данные пользователя]
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function info()
+    {
+        try {
+            $user = Auth::user('web');
 
+            if (!$user) {
+                return ResponseHelpers::jsonResponse([], 404);
+            }
 
+            return ResponseHelpers::jsonResponse($user);
+        } catch (\Exception $e) {
+            return ResponseHelpers::jsonResponse([
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Регистрация
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function registration(Request $request)
+    {
+        try {
+
+            $user = Auth::user('web');
+
+            if ($user) {
+                return ResponseHelpers::jsonResponse([], 403, true);
+            }
+
+            $validator = Validator::make($request->all(),
+                [
+                    'email' => 'required|string|email|max:255|unique:users',
+                    'password' => 'required|min:6',
+                    'confirm_password' => 'required|min:6|same:password',
+                    'firstname' => 'required',
+                    'lastname' => 'required',
+                    'birthday' => 'date_format:Y-m-d',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return ResponseHelpers::jsonResponse([
+                    'error' => $validator->messages()
+                ], 400);
+            }
+
+            Users::create([
+                'firstname' => $request->input('firstname'),
+                'lastname' => $request->input('lastname'),
+                'secondname' => $request->input('secondname'),
+                'birthday' => $request->input('birthday'),
+                'gender' => $request->input('gender'),
+                'email' => $request->input('email'),
+                'role' => 0,
+                'password' => app('hash')->make($request->password),
+                'contacts' => [
+                    'email' => $request->email,
+                    'phone' => $request->input('phone'),
+                    'skype' => $request->input('skype'),
+                ],
+                'provider' => 'web'
+            ]);
+
+            return ResponseHelpers::jsonResponse(['message' => 'Регистрация успешно выполнена'], 200);
+
+        } catch (\Exception $e) {
+            return ResponseHelpers::jsonResponse([
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Выход
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        Auth::guard('web')->logout();
+
+        return ResponseHelpers::jsonResponse(true, 200, true);
     }
 }
