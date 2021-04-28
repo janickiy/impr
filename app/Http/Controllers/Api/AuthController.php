@@ -185,7 +185,7 @@ class AuthController extends Controller
                 'provider' => 'web'
             ]);
 
-            return ResponseHelpers::jsonResponse(['message' => 'Регистрация успешно выполнена'], 200);
+            return ResponseHelpers::jsonResponse(['message' => 'Регистрация успешно выполнена']);
 
         } catch (\Exception $e) {
             return ResponseHelpers::jsonResponse([

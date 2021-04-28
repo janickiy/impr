@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\{Admin, User};
+use App\Models\{Admin, Users};
 use Illuminate\Support\Facades\Auth;
 use DataTables;
 use URL;
@@ -15,11 +15,11 @@ class DataTableController extends Controller
      */
     public function getUsers()
     {
-        $row = User::query();
+        $row = Users::query();
 
         return Datatables::of($row)
             ->addColumn('action', function ($row) {
-                $editBtn = '<a title="редактировать" class="btn btn-xs btn-primary"  href="' . URL::route('cp.users.edit', ['id' => $row->id]) . '"><span  class="fa fa-edit"></span></a> &nbsp;';
+                $editBtn = '';
                 $deleteBtn = '<a title="удалить" class="btn btn-xs btn-danger deleteRow" id="' . $row->id . '"><span class="fa fa-remove"></span></a>';
 
                 return '<div class="nobr"> ' . $editBtn . $deleteBtn . '</div>';

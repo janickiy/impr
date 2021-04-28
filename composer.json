@@ -19,6 +19,7 @@
         "laravelcollective/html": "^6.2",
         "laravelcollective/remote": "^6.2",
         "league/csv": "^9.7",
+        "nesbot/carbon": "^2.46",
         "phpmailer/phpmailer": "^6.4",
         "phpoffice/phpspreadsheet": "^1.17",
         "yajra/laravel-datatables-buttons": "^4.13",

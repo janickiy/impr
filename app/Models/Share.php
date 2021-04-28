@@ -25,4 +25,12 @@ class Share extends Model
         'content_id',
         'user_id',
     ];
+
+    /**
+     * @return mixed
+     */
+    public function user()
+    {
+        return $this->hasOne(Users::class,'id','user_id');
+    }
 }

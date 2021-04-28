@@ -26,4 +26,12 @@ class Complaint extends Model
         'user_id',
         'message',
     ];
+
+    /**
+     * @return mixed
+     */
+    public function user()
+    {
+        return $this->hasOne(Users::class,'id','user_id');
+    }
 }

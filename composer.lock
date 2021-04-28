@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "298524f13f849707670cf1faa1e0e3c3",
+    "content-hash": "6d5f25baa0fed15e3530e18a656bb6bb",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -932,16 +932,16 @@
         },
         {
             "name": "laravel/fortify",
-            "version": "v1.7.11",
+            "version": "v1.7.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/fortify.git",
-                "reference": "db984992eea2286a81429c73a800c784e24e99ff"
+                "reference": "b45807430194c73aaa9b2f26cb76038cc747466f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/fortify/zipball/db984992eea2286a81429c73a800c784e24e99ff",
-                "reference": "db984992eea2286a81429c73a800c784e24e99ff",
+                "url": "https://api.github.com/repos/laravel/fortify/zipball/b45807430194c73aaa9b2f26cb76038cc747466f",
+                "reference": "b45807430194c73aaa9b2f26cb76038cc747466f",
                 "shasum": ""
             },
             "require": {
@@ -987,20 +987,20 @@
                 "auth",
                 "laravel"
             ],
-            "time": "2021-04-20T15:54:43+00:00"
+            "time": "2021-04-27T17:56:34+00:00"
         },
         {
             "name": "laravel/framework",
-            "version": "v8.38.0",
+            "version": "v8.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "26a73532c54d2c090692bf2e3e64e449669053ba"
+                "reference": "a654897ad7f97aea9d7ef292803939798c4a02a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/26a73532c54d2c090692bf2e3e64e449669053ba",
-                "reference": "26a73532c54d2c090692bf2e3e64e449669053ba",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a654897ad7f97aea9d7ef292803939798c4a02a4",
+                "reference": "a654897ad7f97aea9d7ef292803939798c4a02a4",
                 "shasum": ""
             },
             "require": {
@@ -1151,7 +1151,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2021-04-20T13:50:21+00:00"
+            "time": "2021-04-28T14:38:56+00:00"
         },
         {
             "name": "laravel/tinker",

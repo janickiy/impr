@@ -25,4 +25,12 @@ class Transactions extends Model
         'status',
         'user_id',
     ];
+
+    /**
+     * @return mixed
+     */
+    public function user()
+    {
+        return $this->hasOne(Users::class,'id','user_id');
+    }
 }

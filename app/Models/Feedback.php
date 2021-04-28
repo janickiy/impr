@@ -27,4 +27,5 @@ class Feedback extends Model
         'message',
         'status',
     ];
+    
 }

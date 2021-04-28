@@ -23,4 +23,6 @@ class Interests extends Model
     protected $fillable = [
         'name'
     ];
+    
+    
 }

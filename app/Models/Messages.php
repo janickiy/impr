@@ -26,4 +26,20 @@ class Messages extends Model
         'message',
         'status',
     ];
+
+    /**
+     * @return mixed
+     */
+    public function sender()
+    {
+        return $this->hasOne(Users::class,'id','sender_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function receiver()
+    {
+        return $this->hasOne(Users::class,'id','receiver_id');
+    }
 }

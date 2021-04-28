@@ -26,4 +26,37 @@ class Comments extends Model
         'comment',
         'parent_id',
     ];
+
+    /**
+     * @return mixed
+     */
+    public function video()
+    {
+        return $this->hasOne(Videos::class,'id','video_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function user()
+    {
+        return $this->hasOne(Users::class,'id','user_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function parent()
+    {
+        return $this->hasOne($this, 'id', 'parent_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function children()
+    {
+        return $this->hasMany($this, 'parent_id', 'id');
+    }
+
 }

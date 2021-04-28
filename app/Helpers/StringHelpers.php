@@ -440,4 +440,18 @@ class StringHelpers
         }
     }
 
+    /**
+     * @param $str
+     * @param int $start
+     * @param int $end
+     * @return mixed
+     */
+    public static function hidePartText($str, $start = 3, $end = 4)
+    {
+        for ($i = $start; $i < strlen($str) - $end; $i++)
+            $str[$i] = '*';
+
+        return $str;
+    }
+
 }
