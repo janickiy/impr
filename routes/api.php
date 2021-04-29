@@ -28,6 +28,10 @@ Route::group(['prefix' => 'v1'], function() {
         Route::post('add-settings', 'UsersController@addSettings')->name('api.v1.user.add_settings');
         Route::post('subscribe', 'UsersController@subscribe')->name('api.v1.user.subscribe');
         Route::post('unsubscribe', 'UsersController@unsubscribe')->name('api.v1.user.unsubscribe');
+        Route::get('delete/{code}', 'UsersController@delete')->name('api.v1.user.delete');
+        Route::post('like', 'UsersController@like')->name('api.v1.user.like');
+        Route::post('add-comment', 'UsersController@addComment')->name('api.v1.user.add_comment');
+        Route::post('send-message', 'UsersController@sendMessage')->name('api.v1.user.send_message');
     });
 
 });
