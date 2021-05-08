@@ -21,16 +21,23 @@ class Share extends Model
      * @var array
      */
     protected $fillable = [
-        'content_type',
-        'content_id',
+        'video_id',
         'user_id',
     ];
 
     /**
-     * @return mixed
+     * @return hasOne
      */
-    public function user()
+    public function user(): hasOne
     {
-        return $this->hasOne(Users::class,'id','user_id');
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
+    /**
+     * @return hasOne
+     */
+    public function video(): hasOne
+    {
+        return $this->hasOne(Video::class,'id','video_id');
     }
 }

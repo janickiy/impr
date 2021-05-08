@@ -26,11 +26,12 @@ class Likes extends Model
         'content_id',
     ];
 
+
     /**
-     * @return mixed
+     * @return hasOne
      */
-    public function user()
+    public function user(): hasOne
     {
-        return $this->hasOne(Users::class,'id','user_id');
+        return $this->hasOne(User::class,'id','user_id');
     }
 }

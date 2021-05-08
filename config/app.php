@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Improver'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,8 +38,6 @@ return [
     | application. If disabled, a simple generic error page is shown.
     |
     */
-
-    'domains' => [],
 
     'debug' => (bool) env('APP_DEBUG', false),
 
@@ -95,7 +93,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'ru',
+    'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -124,6 +122,8 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+
+    'paths' => ['api/*'],
 
     /*
     |--------------------------------------------------------------------------
@@ -167,6 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
+        ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -177,14 +178,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        App\Providers\FortifyServiceProvider::class,
-        Ixudra\Curl\CurlServiceProvider::class,
 
+        Ixudra\Curl\CurlServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
         Yajra\DataTables\HtmlServiceProvider::class,
+
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
     ],
 
@@ -212,6 +213,7 @@ return [
         'Config' => Illuminate\Support\Facades\Config::class,
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
+        'Date' => Illuminate\Support\Facades\Date::class,
         'DB' => Illuminate\Support\Facades\DB::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
@@ -226,7 +228,7 @@ return [
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
-        'Redis' => Illuminate\Support\Facades\Redis::class,
+        // 'Redis' => Illuminate\Support\Facades\Redis::class,
         'Request' => Illuminate\Support\Facades\Request::class,
         'Response' => Illuminate\Support\Facades\Response::class,
         'Route' => Illuminate\Support\Facades\Route::class,
@@ -237,13 +239,15 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class,
 
         'Curl' => Ixudra\Curl\Facades\Curl::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 
 ];

@@ -30,7 +30,7 @@ class Comments extends Model
     /**
      * @return mixed
      */
-    public function video()
+    public function video(): hasOne
     {
         return $this->hasOne(Videos::class,'id','video_id');
     }
@@ -38,7 +38,7 @@ class Comments extends Model
     /**
      * @return mixed
      */
-    public function user()
+    public function user(): hasOne
     {
         return $this->hasOne(Users::class,'id','user_id');
     }
@@ -46,7 +46,7 @@ class Comments extends Model
     /**
      * @return mixed
      */
-    public function parent()
+    public function parent(): hasOne
     {
         return $this->hasOne($this, 'id', 'parent_id');
     }
@@ -54,7 +54,7 @@ class Comments extends Model
     /**
      * @return mixed
      */
-    public function children()
+    public function children(): hasMany
     {
         return $this->hasMany($this, 'parent_id', 'id');
     }

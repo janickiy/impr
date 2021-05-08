@@ -30,7 +30,7 @@ class Messages extends Model
     /**
      * @return mixed
      */
-    public function sender()
+    public function sender(): hasOne
     {
         return $this->hasOne(Users::class,'id','sender_id');
     }
@@ -38,7 +38,7 @@ class Messages extends Model
     /**
      * @return mixed
      */
-    public function receiver()
+    public function receiver(): hasOne
     {
         return $this->hasOne(Users::class,'id','receiver_id');
     }

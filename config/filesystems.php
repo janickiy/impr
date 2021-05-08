@@ -17,19 +17,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Cloud Filesystem Disk
-    |--------------------------------------------------------------------------
-    |
-    | Many applications store files both locally and in the cloud. For this
-    | reason, you may specify a default "cloud" driver here. This driver
-    | will be bound as the Cloud disk implementation in the container.
-    |
-    */
-
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
-
-    /*
-    |--------------------------------------------------------------------------
     | Filesystem Disks
     |--------------------------------------------------------------------------
     |
@@ -55,16 +42,37 @@ return [
             'visibility' => 'public',
         ],
 
-        's3' => [
+        's3_cold' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
+            'key' => env('AWS_COLD_ACCESS_KEY_ID'),
+            'secret' => env('AWS_COLD_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_COLD_DEFAULT_REGION'),
+            'bucket' => env('AWS_COLD_BUCKET'),
+            'url' => env('AWS_COLD_URL'),
+            'endpoint' => env('AWS_COLD_ENDPOINT'),
+            'lifetime' => env('AWS_COLD_URL_LIFETIME'),
         ],
 
+        's3_hot' => [
+            'driver' => 's3',
+            'key' => env('AWS_HOT_ACCESS_KEY_ID'),
+            'secret' => env('AWS_HOT_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_HOT_DEFAULT_REGION'),
+            'bucket' => env('AWS_HOT_BUCKET'),
+            'url' => env('AWS_HOT_URL'),
+            'endpoint' => env('AWS_HOT_ENDPOINT'),
+            'lifetime' => env('AWS_HOT_URL_LIFETIME'),
+        ],
+
+        'local_video' => [
+            'driver' => 'local',
+            'root' => storage_path('videos'),
+        ],
+
+        'root' => [
+            'driver' => 'local',
+            'root' => '/',
+        ],
     ],
 
     /*

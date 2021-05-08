@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -41,21 +41,21 @@ return [
             'provider' => 'users',
         ],
 
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+            'hash' => false,
+        ],
 
         'admin' => [
             'driver' => 'session',
             'provider' => 'admin',
         ],
-
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-        ],
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Admin Providers
+    | User Providers
     |--------------------------------------------------------------------------
     |
     | All authentication drivers have a user provider. This defines how the
@@ -71,14 +71,14 @@ return [
     */
 
     'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
         'admin' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
-        ],
-
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Users::class,
         ],
 
         // 'users' => [

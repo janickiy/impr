@@ -196,6 +196,10 @@ Use search to find needed section.
                 <a href="{{URL::route('cp.admin.index')}}"><i class="fa fa-fw fa-users"></i> <span class="menu-item-parent"> Администраторы</span></a>
             </li>
 
+            <li {!! Request::is('settings*') ? ' class="active"' : '' !!}>
+                <a href="{{URL::route('cp.settings.index')}}"><i class="fa fa-fw fa-gear"></i> <span class="menu-item-parent"> Настройки</span></a>
+            </li>
+
         </ul>
 
     </nav>
@@ -259,7 +263,7 @@ Use search to find needed section.
 <div class="page-footer">
     <div class="row">
         <div class="col-xs-12 col-sm-6">
-            <span class="txt-color-white"><span class="hidden-xs"></span> © {{ date('Y') }} improover</span>
+            <span class="txt-color-white"><span class="hidden-xs"></span> © {{ date('Y') }} Improver – платформа для микротренингов</span>
         </div>
     </div>
     <!-- end row -->

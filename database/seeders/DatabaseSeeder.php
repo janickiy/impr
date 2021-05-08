@@ -3,21 +3,19 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Admin;
-
 
 class DatabaseSeeder extends Seeder
 {
-
     /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * Seed the application's database.
+     *
+     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        Admin::create([
-            'name' => 'Admin',
-            'login' => 'admin',
-            'password' => app('hash')->make('123456'),
+        $this->call([
+            TagSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }

@@ -11,12 +11,11 @@ class CreateShareTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('share', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('content_type',50);
-            $table->integer('content_id')->index('share_content_id');
+            $table->integer('video_id')->index('share_video_id');
             $table->integer('user_id')->index('share_user_id');
             $table->timestamps();
         });
@@ -27,7 +26,7 @@ class CreateShareTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('share');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\JsonResponseMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -14,6 +15,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        \Fruitcake\Cors\HandleCors::class,
         // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
         \Fruitcake\Cors\HandleCors::class,
@@ -33,17 +35,15 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\Session\Middleware\AuthenticateSession::class,
+            // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
         'api' => [
-            \App\Http\Middleware\EncryptCookies::class,
+            JsonResponseMiddleware::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             'throttle:600,1',
         ],
@@ -58,8 +58,6 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\AdminPanelMiddleware::class,
         ],
-
-
     ];
 
     /**
@@ -70,7 +68,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+        'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,

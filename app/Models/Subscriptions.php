@@ -15,6 +15,10 @@ class Subscriptions extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = null;
+
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *

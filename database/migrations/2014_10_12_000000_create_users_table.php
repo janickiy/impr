@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\User;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
@@ -11,26 +12,22 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->id();
+            $table->string('email', 32)->unique()->nullable();
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('secondname')->nullable();
-            $table->text('about')->nullable();
             $table->date('birthday')->nullable();
-            $table->string('gender', 10)->nullable();
-            $table->json('contacts')->nullable();
-            $table->json('settings')->nullable();
-            $table->smallInteger('role')->default(0);
-            $table->string('provider', 100)->nullable();
+            $table->string('password', 100)->nullable();
+            $table->integer('gender')->default(User::GENDER_MALE);
+            $table->timestamp('birthdate')->nullable();
+            $table->jsonb('contacts')->nullable();
+            $table->jsonb('settings')->nullable();
+            $table->rememberToken();
             $table->timestamp('banned_at')->nullable();
             $table->timestamp('deleted_at')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -40,7 +37,7 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('users');
     }

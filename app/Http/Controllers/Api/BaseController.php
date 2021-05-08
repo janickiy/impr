@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\{Users, Subscriptions};
-use App\Helpers\ResponseHelpers;
 use Auth;
 
 class BaseController extends Controller
@@ -13,19 +11,13 @@ class BaseController extends Controller
 
     public function __construct()
     {
-        try {
-            $this->middleware(function ($request, $next) {
+        $this->middleware(function ($request, $next) {
 
-               $this->user = Auth::user('web');
-                if (!$this->user) {
-                    return ResponseHelpers::jsonResponse(['error' => true, 'message' => 'Auth required'], 401);
-                }
-                return $next($request);
-            });
-        } catch (\Exception $e) {
-            return ResponseHelpers::jsonResponse([
-                'error' => $e->getMessage()
-            ], 500);
-        }
+            $this->user = Auth::user('web');
+            if (!$this->user) {
+                return response()->json(['error' => true, 'message' => 'Auth required'], 401);
+            }
+            return $next($request);
+        });
     }
 }

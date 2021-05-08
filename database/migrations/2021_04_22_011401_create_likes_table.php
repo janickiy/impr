@@ -11,7 +11,7 @@ class CreateLikesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->increments('id');
@@ -27,7 +27,7 @@ class CreateLikesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('likes');
     }
